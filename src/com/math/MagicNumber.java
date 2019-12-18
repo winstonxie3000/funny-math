@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * any 4-digit number calculate by the following steps will always end with 6174 within 7 steps:
+ *
+ * for example:
+ * 9432 - 2349 = 7083
+ * 8730 - 0378 = 8352
+ * 8532 - 2358 = 6174
+ * 7641 - 1467 = 6174
+ */
 public class MagicNumber {
     public static void main(String[] args) {
 
