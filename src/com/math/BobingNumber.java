@@ -15,6 +15,7 @@ public class BobingNumber {
         int siJincnt   = 0;
         int zhuangYuancnt = 0;
         int chaJinHuaCnt  = 0;
+        int duitangCnt = 0;
 
         for (int i = 1; i <= 6; i++) {
             for (int j = 1; j <= 6; j++) {
@@ -29,9 +30,6 @@ public class BobingNumber {
                                 numbers[3] = l;
                                 numbers[4] = m;
                                 numbers[5] = n;
-                                if (isSiJin(numbers)) {
-                                    siJincnt++;
-                                }
                                 if (isYiXiu(numbers)) {
                                     yiXiuCnt++;
                                 }
@@ -50,6 +48,9 @@ public class BobingNumber {
                                 if (isChaJinHua(numbers)) {
                                     chaJinHuaCnt++;
                                 }
+                                if (isDuiTang(numbers)) {
+                                    duitangCnt = duitangCnt + 1;
+                                }
                             }
 
                         }
@@ -62,6 +63,7 @@ public class BobingNumber {
         System.out.println("二举的概率是:" + erJucnt + "/" + totalCnt + " = " + ((double)erJucnt*100/(double)totalCnt) + "%");
         System.out.println("三红的概率是:" + sanHongcnt + "/" + totalCnt + " = " + ((double)sanHongcnt*100/(double)totalCnt) + "%");
         System.out.println("四进的概率是:" + siJincnt + "/" + totalCnt + " = " + ((double)siJincnt*100/(double)totalCnt) + "%");
+        System.out.println("对堂的概率是:" + duitangCnt + "/" + totalCnt + " = " + ((double)duitangCnt*100/(double)totalCnt) + "%");
         System.out.println("状元的概率是:" + zhuangYuancnt + "/" + totalCnt + " = " + ((double)zhuangYuancnt*100/(double)totalCnt) + "%");
         System.out.println("状元插金花的概率是:" + chaJinHuaCnt + "/" + totalCnt + " = " + ((double)chaJinHuaCnt*100/(double)totalCnt) + "%");
     }
@@ -114,6 +116,28 @@ public class BobingNumber {
     }
 
     /**
+     * 判断是否是对堂
+     * @return
+     */
+    public static boolean isDuiTang(int [] numbers) {
+
+        boolean result = false;
+
+        if ((countNumber(numbers, 1) == 1)
+                && (countNumber(numbers, 2) == 1)
+                && (countNumber(numbers, 3) == 1)
+                && (countNumber(numbers, 4) == 1)
+                && (countNumber(numbers, 5) == 1)
+                && (countNumber(numbers, 6) == 1)
+        ) {
+            result = true;
+        }
+
+        return result;
+
+    }
+
+    /**
      * 计算有多少个4
      * @param numbers
      * @return 4的个数
@@ -131,6 +155,16 @@ public class BobingNumber {
     private static int countNumber2(int [] numbers) {
 
         return countNumber(numbers, 2);
+    }
+
+    /**
+     * 计算有多少个1
+     * @param numbers
+     * @return 1的个数
+     */
+    private static int countNumber1(int [] numbers) {
+
+        return countNumber(numbers, 1);
     }
 
     /**
@@ -211,6 +245,6 @@ public class BobingNumber {
      */
     public static boolean isChaJinHua(int [] numbers) {
 
-        return countNumber4(numbers) == 4 && countNumber2(numbers) == 2;
+        return countNumber4(numbers) == 4 && countNumber1(numbers) == 2;
     }
 }
